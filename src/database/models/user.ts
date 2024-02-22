@@ -1,6 +1,5 @@
 import { Model, DataTypes } from 'sequelize';
 import connection from '../connection';
-import Todo from './todos.js';
 
 interface UserAttributes {
   id?: number;
