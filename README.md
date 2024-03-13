@@ -33,3 +33,5 @@ npx sequelize db:migrate:undo
 
 - [Sequelize CLI & Typescript](https://dev.to/maliksamad/sequelize-cli-typescript-4ff0)
 - [Sequelize CLI & Typescript - Example](https://github.com/MichalZalecki/sequelize-with-typescript-example)
+
+https://www.youtube.com/watch?v=MEl2R7mEAP8

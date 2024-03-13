@@ -1,14 +1,20 @@
-import { Sequelize } from 'sequelize';
-import { processEnv } from '@utils/processEnv.js';
+import { Sequelize } from '@sequelize/core';
+import { processEnv } from '../utils/processEnv.js';
+import  {UserCore}  from './models/index.js';
 
 const DB_DATABASE = processEnv().DB_DATABASE as string;
 const DB_USERNAME = processEnv().DB_USERNAME as string;
 const DB_PASSWORD = processEnv().DB_PASSWORD as string;
+const DB_DIALECT = processEnv().DB_DIALECT as 'mysql';
+const DB_HOST = processEnv().DB_HOST as string;
 
 let sequelizeConnection: Sequelize = new Sequelize(DB_DATABASE, DB_USERNAME, DB_PASSWORD, {
-  host: processEnv().DB_HOST,
-  dialect: 'mysql',
+  host: DB_HOST,
+  dialect: DB_DIALECT,
   port: 3306, 
+  schema: DB_DATABASE,
+  models: [UserCore],
+  logging: (...msg) => console.log(msg)
 });
 
 try {

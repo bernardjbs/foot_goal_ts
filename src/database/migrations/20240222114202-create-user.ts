@@ -1,38 +1,26 @@
-import { QueryInterface, DataTypes } from 'sequelize';
+import { DataTypes } from '@sequelize/core';
+import { Migration } from '@database/models/index.js';
 
-/** @type {import('sequelize-cli').Migration} */
-module.exports = {
-  async up(queryInterface: QueryInterface, Sequelize:typeof DataTypes) {
-    await queryInterface.createTable('Users', {
-      id: {
-        allowNull: false,
-        autoIncrement: true,
-        primaryKey: true,
-        type: Sequelize.INTEGER
-      },
-      firstName: {
-        type: Sequelize.STRING
-      },
-      lastName: {
-        type: Sequelize.STRING
-      },
-      email: {
-        type: Sequelize.STRING
-      },
-      password: {
-        type: Sequelize.STRING
-      },
-      createdAt: {
-        allowNull: false,
-        type: Sequelize.DATE
-      },
-      updatedAt: {
-        allowNull: false,
-        type: Sequelize.DATE
-      }
-    });
-  },
-  async down(queryInterface:QueryInterface, Sequelize:any) {
-    await queryInterface.dropTable('Users');
-  }
-};
+
+export const up: Migration = async({ context: queryInterface }) => {
+  await queryInterface.createTable('users', {
+    id: {
+      allowNull: false,
+      autoIncrement: true,
+      primaryKey: true,
+      type: DataTypes.INTEGER,
+    },
+    firstName: {
+      allowNull: false,
+      type: DataTypes.STRING,
+    },
+    lastName: {
+      allowNull: false,
+      type: DataTypes.STRING,
+    }
+  })
+}
+
+export const down: Migration = async ({ context: queryInterface}) => { 
+  await queryInterface.dropTable('users')
+}

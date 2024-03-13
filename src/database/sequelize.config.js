@@ -1,11 +1,10 @@
-require('ts-node/register');
-const configs = require('./config');
-console.log(configs.DB_USERNAME)
-module.exports = {
-  username: configs.DB_USERNAME,
-  password: configs.DB_PASSWORD,
-  database: configs.DB_DATABASE,
-  host: configs.DB_HOST,
+import ENV from './configs.js'
+
+export default {
+  username: ENV.DB_USERNAME,
+  password: ENV.DB_PASSWORD,
+  database: ENV.DB_DATABASE,
+  host: ENV.DB_HOST,
   dialect: 'mysql',
-  port: 3306
+  port: ENV.PORT
 };
