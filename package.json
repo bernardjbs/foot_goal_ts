@@ -6,34 +6,46 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "watch": "concurrently \"tsc -w\" \"tsc-alias -w\"",
-    "start": "node build/server.js",
-    "dev": "concurrently \"npm run watch\" \"npm run start\""
+    "start": "node dist/index.js",
+    "dev": "concurrently \"npm run watch\" \"npm run start\"",
+    "db:create": "cd src/database && sequelize db:create",
+    "db:migrate": "cd src/database && sequelize db:migrate"
   },
   "type": "module",
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@types/bcrypt": "^5.0.2",
     "@types/express": "^4.17.21",
     "@types/node": "^20.11.17",
+    "@types/sequelize": "^4.28.20",
     "concurrently": "^8.2.2",
     "prettier": "3.2.5",
+    "ts-node": "^10.9.2",
     "tsc-alias": "^1.8.8",
     "tsc-watch": "^6.0.4",
     "typescript": "^5.3.3"
   },
   "dependencies": {
+    "@sequelize/core": "^7.0.0-alpha.37",
+    "bcrypt": "^5.1.1",
     "colors.ts": "^1.0.20",
     "dotenv": "^16.4.4",
     "express": "^4.18.2",
     "module-alias": "^2.2.3",
     "mysql2": "^3.9.1",
     "playwright": "^1.41.2",
-    "sequelize": "^6.37.0"
+    "sequelize": "^6.37.0",
+    "sequelize-cli": "^6.6.2",
+    "umzug": "^3.7.0"
   },
   "_moduleAliases": {
     "@utils": "./dist/utils",
     "@config": "./dist/config",
+    "@database": "./dist/database",
     "@WebWalker": "./dist/webwalker",
+    "@models": "./dist/database/models",
+    "@controllers": "./dist/database/controllers",
     "@root": "./dist"
   }
 }
