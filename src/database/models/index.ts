@@ -1,7 +1,7 @@
-import UserCore from '../models/UserCore.js';
+import User from '../models/User.js';
 
 // TODO: Relationships
 
 export {
-  UserCore
+  User
 };

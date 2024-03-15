@@ -1,6 +1,7 @@
 import express from 'express';
 import sequelizeConnection from './database/connection.js';
 import { Umzug, SequelizeStorage } from 'umzug';
+import argv from '@utils/args.js';
 
 const umzug = new Umzug({
   migrations: { glob: 'migrations/*.js' },
@@ -11,17 +12,19 @@ const umzug = new Umzug({
 
 export type Migration = typeof umzug._types.migration;
 
-const init = async (migrationType: string) => {
+const init = async (migration: string | boolean | null) => {
   try {
     console.log('Syncing Database... ');
 
-    if (migrationType == 'fresh') {
+    if (migration == 'fresh') {
+      console.log('forcing true')
       await sequelizeConnection.sync({ force: true });
     } else {
       await sequelizeConnection.sync();
     }
 
-    console.log('Database synced, Migrating...');
+    console.log(`Database synced,${migration ? ' ' + migration : ''} migration in progress...`);
+    
     try {
       await umzug.up();
       console.log('Migration done!');
@@ -34,16 +37,16 @@ const init = async (migrationType: string) => {
   }
 };
 
-export const syncAllModels = async (migrationType:string = '') => {
-  await init(migrationType);
+export const syncAllModels = async (migration: string | boolean | null) => {
+  await init(migration);
 };
 
 const app = express();
 const PORT = process.env.PORT || 3000;
 
 sequelizeConnection.sync().then(() => {
-  syncAllModels('fresh');
+  syncAllModels(argv('migration')); // option as --migration='fresh'
   app.listen(PORT, () => {
-    console.log(`Server HAO is running on http://localhost:${PORT}`);
+    console.log(`Server is running on http://localhost:${PORT}`);
   });
 });
