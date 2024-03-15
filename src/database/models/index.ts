@@ -1,8 +1,7 @@
-import User from '../models/User.js';
-import FootMatch from '../models/FootMatch.js';
-import Competition from '../models/Competition.js';
-import Stats from '../models/Competition.js';
+import User from './User.js';
+import FootMatch from './FootMatch.js';
+import Competition from './Competition.js';
+import Stats from './Stats.js';
+import UserMatch from './UserMatch.js';
 
-// TODO: Relationships
-
-export { User, FootMatch, Competition, Stats };
+export { User, FootMatch, Competition, Stats, UserMatch };
