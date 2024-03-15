@@ -1,6 +1,6 @@
 import { Sequelize } from '@sequelize/core';
 import { processEnv } from '../utils/processEnv.js';
-import  {User}  from './models/index.js';
+import  {User, FootMatch}  from './models/index.js';
 
 const DB_DATABASE = processEnv().DB_DATABASE as string;
 const DB_USERNAME = processEnv().DB_USERNAME as string;
@@ -13,7 +13,7 @@ let sequelizeConnection: Sequelize = new Sequelize(DB_DATABASE, DB_USERNAME, DB_
   dialect: DB_DIALECT,
   port: 3306, 
   schema: DB_DATABASE,
-  models: [User],
+  models: [User, FootMatch],  
   logging: (...msg) => console.log(msg)
 });
 

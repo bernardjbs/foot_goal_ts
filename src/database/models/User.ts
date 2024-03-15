@@ -36,7 +36,11 @@ class User extends Model<InferAttributes<User>, InferCreationAttributes<User>> {
 
   @Attribute(DataTypes.STRING)
   @NotNull
-  declare mobilePhone: string | null;
+  declare email: string | null;
+
+  @Attribute(DataTypes.STRING)
+  @NotNull
+  declare phone: string | null;
 
   //TODO: BeforeCreate: Check if hashing when saved
   @BeforeCreate() 
