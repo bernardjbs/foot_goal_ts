@@ -17,14 +17,13 @@ const init = async (migration: string | boolean | null) => {
     console.log('Syncing Database... ');
 
     if (migration == 'fresh') {
-      console.log('forcing true')
       await sequelizeConnection.sync({ force: true });
     } else {
       await sequelizeConnection.sync();
     }
 
     console.log(`Database synced,${migration ? ' ' + migration : ''} migration in progress...`);
-    
+
     try {
       await umzug.up();
       console.log('Migration done!');

@@ -5,6 +5,4 @@ import Stats from '../models/Competition.js';
 
 // TODO: Relationships
 
-export {
-  User, FootMatch, Competition, Stats
-};
+export { User, FootMatch, Competition, Stats };
