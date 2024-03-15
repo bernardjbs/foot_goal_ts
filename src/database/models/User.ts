@@ -1,10 +1,4 @@
-import {
-  DataTypes,
-  Model,
-  InferAttributes,
-  InferCreationAttributes,
-  CreationOptional
-} from '@sequelize/core';
+import { DataTypes, Model, InferAttributes, InferCreationAttributes, CreationOptional } from '@sequelize/core';
 import bcrypt from 'bcrypt';
 import { Attribute, PrimaryKey, AutoIncrement, NotNull, Table, BeforeCreate } from '@sequelize/core/decorators-legacy';
 
@@ -36,10 +30,14 @@ class User extends Model<InferAttributes<User>, InferCreationAttributes<User>> {
 
   @Attribute(DataTypes.STRING)
   @NotNull
-  declare mobilePhone: string | null;
+  declare email: string | null;
+
+  @Attribute(DataTypes.STRING)
+  @NotNull
+  declare phone: string | null;
 
   //TODO: BeforeCreate: Check if hashing when saved
-  @BeforeCreate() 
+  @BeforeCreate()
   static async hashPassword(instance: User) {
     if (instance.changed('password') && instance.password !== null) {
       const saltRounds = 10;
