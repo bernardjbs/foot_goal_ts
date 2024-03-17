@@ -36,6 +36,8 @@ class User extends Model<InferAttributes<User>, InferCreationAttributes<User>> {
   @NotNull
   declare phone: string | null;
 
+  // TODO: Association belongsToMany Competitions
+
   //TODO: BeforeCreate: Check if hashing when saved
   @BeforeCreate()
   static async hashPassword(instance: User) {

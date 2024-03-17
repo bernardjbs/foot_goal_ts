@@ -6,5 +6,5 @@ export default {
   database: ENV.DB_DATABASE,
   host: ENV.DB_HOST,
   dialect: 'mysql',
-  port: ENV.PORT
+  port: ENV.DB_PORT
 };

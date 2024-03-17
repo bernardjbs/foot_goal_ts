@@ -3,10 +3,11 @@ import sequelizeConnection from './database/connection.js';
 import { Umzug, SequelizeStorage } from 'umzug';
 import argv from '@utils/args.js';
 
+const sequelizeStorage = new SequelizeStorage({ sequelize: sequelizeConnection });
 const umzug = new Umzug({
   migrations: { glob: 'migrations/*.js' },
   context: sequelizeConnection.getQueryInterface(),
-  // storage: new SequelizeStorage(sequelizeConnection),
+  storage: sequelizeStorage,
   logger: console
 });
 
@@ -44,7 +45,7 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 
 sequelizeConnection.sync().then(() => {
-  syncAllModels(argv('migration')); // option as --migration='fresh'
+  // syncAllModels(argv('migration')); // option as --migration='fresh'
   app.listen(PORT, () => {
     console.log(`Server is running on http://localhost:${PORT}`);
   });
