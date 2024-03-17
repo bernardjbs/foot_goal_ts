@@ -14,7 +14,7 @@ let sequelizeConnection: Sequelize = new Sequelize(DB_DATABASE, DB_USERNAME, DB_
   port: 3306,
   schema: DB_DATABASE,
   models: [User, FootMatch, Competition, Stats, UserMatch],
-  logging: (...msg) => console.log(msg)
+  // logging: (...msg) => console.log(msg)
 });
 
 try {

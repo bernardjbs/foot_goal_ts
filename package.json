@@ -7,7 +7,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "watch": "concurrently \"tsc -w\" \"tsc-alias -w\"",
     "start": "node dist/index.js",
-    "start:fresh": "node dist/index.js --migrate='fresh'",
+    "start:fresh": "node dist/index.js --migrate:fresh",
+    "start:fresh:seed": "node dist/index.js --migrate:fresh --seed",
     "dev": "concurrently \"npm run watch\" \"npm run start\""
   },
   "type": "module",
