@@ -13,9 +13,9 @@ class FootMatch extends Model<InferAttributes<FootMatch>, InferCreationAttribute
   @AutoIncrement
   declare id: CreationOptional<number>;
 
-  @Attribute(DataTypes.INTEGER)
+  @Attribute(DataTypes.STRING)
   @NotNull
-  declare matchId: number;
+  declare matchId: string;
 
   @Attribute(DataTypes.INTEGER)
   @NotNull

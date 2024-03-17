@@ -1,6 +1,7 @@
 import User from '@database/models/User.js';
+import { UserInterface } from '@ts/interfaces.js';
 import bcrypt from 'bcrypt';
-const userData = [
+const userData: UserInterface[] = [
   {
     firstName: 'Admin',
     lastName: 'Foot',
@@ -8,18 +9,14 @@ const userData = [
     password: await bcrypt.hash('secret', 10),
     email: 'admin@footgoal.com',
     phone: '038974867',
-    createdAt: new Date(),
-    updatedAt: new Date()
   }, 
   {
     firstName: 'Jean',
     lastName: 'Sin',
-    username: 'bernardjbs',
+    username: 'jeansin',
     password: await bcrypt.hash('secret', 10),
     email: 'jean@footgoal.com',
     phone: '049238492',
-    createdAt: new Date(),
-    updatedAt: new Date()
   },
   {
     firstName: 'User',
@@ -28,8 +25,6 @@ const userData = [
     password: await bcrypt.hash('secret', 10),
     email: 'user@footgoal.com',
     phone: '099384742',
-    createdAt: new Date(),
-    updatedAt: new Date()
   },
 ];
 

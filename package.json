@@ -46,6 +46,7 @@
     "@WebWalker": "./dist/webwalker",
     "@models": "./dist/database/models",
     "@controllers": "./dist/database/controllers",
+    "@ts": "./dist/ts",
     "@root": "./dist"
   }
 }
