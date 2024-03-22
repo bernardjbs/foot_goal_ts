@@ -1,5 +1,5 @@
 import { DataTypes, Model, InferAttributes, InferCreationAttributes, CreationOptional, NonAttribute } from '@sequelize/core';
-import { Attribute, PrimaryKey, AutoIncrement, NotNull, Table, BelongsToMany, HasMany } from '@sequelize/core/decorators-legacy';
+import { Attribute, PrimaryKey, AutoIncrement, NotNull, Table, BelongsToMany, HasMany, Unique } from '@sequelize/core/decorators-legacy';
 import User from './User.js';
 import Stats from './Stats.js';
 
@@ -8,14 +8,11 @@ import Stats from './Stats.js';
   tableName: 'matches'
 })
 class FootMatch extends Model<InferAttributes<FootMatch>, InferCreationAttributes<FootMatch>> {
-  @Attribute(DataTypes.INTEGER)
+  @Attribute(DataTypes.STRING)
   @PrimaryKey
-  @AutoIncrement
-  declare id: CreationOptional<number>;
-
-  @Attribute(DataTypes.INTEGER)
+  @Unique
   @NotNull
-  declare matchId: number;
+  declare matchId: string;
 
   @Attribute(DataTypes.INTEGER)
   @NotNull

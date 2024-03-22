@@ -17,9 +17,9 @@ class Stats extends Model<InferAttributes<Stats>, InferCreationAttributes<Stats>
   @AutoIncrement
   declare id: CreationOptional<number>;
 
-  @Attribute(DataTypes.INTEGER)
+  @Attribute(DataTypes.STRING)
   @NotNull
-  declare matchId: number;
+  declare matchId: string;
 
   @Attribute(DataTypes.STRING)
   @NotNull
@@ -29,73 +29,68 @@ class Stats extends Model<InferAttributes<Stats>, InferCreationAttributes<Stats>
   @NotNull
   declare score: number | null;
 
-  @Attribute(DataTypes.INTEGER)
-  @NotNull
+  @Attribute(DataTypes.FLOAT)
   declare xg: number | null;
 
   @Attribute(DataTypes.INTEGER)
-  @NotNull
   declare possession: number | null;
 
   @Attribute(DataTypes.INTEGER)
-  @NotNull
   declare shots: number | null;
 
   @Attribute(DataTypes.INTEGER)
-  @NotNull
   declare shotsOnTarget: number | null;
 
   @Attribute(DataTypes.INTEGER)
-  @NotNull
   declare shotsOffTarget: number | null;
 
   @Attribute(DataTypes.INTEGER)
-  @NotNull
   declare saves: number | null;
 
   @Attribute(DataTypes.INTEGER)
-  @NotNull
   declare corners: number | null;
 
   @Attribute(DataTypes.INTEGER)
-  @NotNull
   declare offsides: number | null;
 
   @Attribute(DataTypes.INTEGER)
-  @NotNull
   declare throwIns: number | null;
 
   @Attribute(DataTypes.INTEGER)
-  @NotNull
   declare freeKicks: number | null;
 
   @Attribute(DataTypes.INTEGER)
-  @NotNull
   declare tackles: number | null;
 
   @Attribute(DataTypes.INTEGER)
-  @NotNull
   declare fouls: number | null;
 
   @Attribute(DataTypes.INTEGER)
-  @NotNull
   declare yellowCards: number | null;
 
   @Attribute(DataTypes.INTEGER)
-  @NotNull
   declare redCards: number | null;
 
   @Attribute(DataTypes.INTEGER)
-  @NotNull
   declare passes: number | null;
 
   @Attribute(DataTypes.INTEGER)
-  @NotNull
+  declare passesComplete: number | null;
+
+  @Attribute(DataTypes.INTEGER)
   declare attacks: number | null;
 
   @Attribute(DataTypes.INTEGER)
-  @NotNull
   declare dangerousAttacks: number | null;
+
+  @Attribute(DataTypes.INTEGER)
+  declare clearance: number | null;
+
+  @Attribute(DataTypes.INTEGER)
+  declare crossesComplete: number | null;
+
+  @Attribute(DataTypes.INTEGER)
+  declare interceptions: number | null;
 }
 
 export default Stats;
