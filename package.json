@@ -29,6 +29,7 @@
   "dependencies": {
     "@sequelize/core": "^7.0.0-alpha.37",
     "bcrypt": "^5.1.1",
+    "body-parser": "^1.20.2",
     "colors.ts": "^1.0.20",
     "dotenv": "^16.4.4",
     "express": "^4.18.2",
@@ -45,7 +46,7 @@
     "@database": "./dist/database",
     "@WebWalker": "./dist/webwalker",
     "@models": "./dist/database/models",
-    "@controllers": "./dist/database/controllers",
+    "@controllers": "./dist/database/controller",
     "@ts": "./dist/ts",
     "@root": "./dist"
   }
