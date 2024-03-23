@@ -1,6 +1,6 @@
 import { DataTypes, Model, InferAttributes, InferCreationAttributes, CreationOptional } from '@sequelize/core';
 import bcrypt from 'bcrypt';
-import { Attribute, PrimaryKey, AutoIncrement, NotNull, Table, BeforeCreate } from '@sequelize/core/decorators-legacy';
+import { Attribute, PrimaryKey, AutoIncrement, NotNull, Table, BeforeCreate, DeletedAt } from '@sequelize/core/decorators-legacy';
 
 @Table({
   underscored: true,
@@ -18,24 +18,28 @@ class User extends Model<InferAttributes<User>, InferCreationAttributes<User>> {
 
   @Attribute(DataTypes.STRING)
   @NotNull
-  declare lastName: string | null;
+  declare lastName: string;
 
   @Attribute(DataTypes.STRING)
   @NotNull
-  declare username: string | null;
+  declare username: string;
 
   @Attribute(DataTypes.STRING)
   @NotNull
-  declare password: string | null;
+  declare password: string;
 
   @Attribute(DataTypes.STRING)
   @NotNull
-  declare email: string | null;
+  declare email: string;
 
   @Attribute(DataTypes.STRING)
   @NotNull
-  declare phone: string | null;
+  declare phone: string;
 
+  // Soft delete
+  @DeletedAt
+  declare deletedAt: Date | null;
+  
   // TODO: Association belongsToMany Competitions
 
   //TODO: BeforeCreate: Check if hashing when saved

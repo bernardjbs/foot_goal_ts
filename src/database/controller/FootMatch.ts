@@ -1,6 +1,5 @@
 import express, { Request, Response } from 'express';
 
-// Import your Match model here
 import Match from '@models/FootMatch.js';
 
 const router = express.Router();
@@ -60,7 +59,7 @@ router.delete('/match/:id', async (req: Request, res: Response) => {
       return res.status(404).json({ message: 'Match not found' });
     }
     await match.destroy();
-    res.json({ message: 'Match deleted successfully' });
+    res.status(200).json({ message: 'Match deleted successfully' });
   } catch (error: any) {
     res.status(500).json({ message: error.message });
   }

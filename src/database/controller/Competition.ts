@@ -1,8 +1,6 @@
 import express, { Request, Response } from 'express';
 
-// Import your Competition model here
 import Competition from '@models/Competition.js';
-
 const router = express.Router();
 
 // GET all competitions
