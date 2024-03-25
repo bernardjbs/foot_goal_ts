@@ -1,8 +1,6 @@
 import express, { Request, Response } from 'express';
 import bcrypt from 'bcrypt';
-import jwt from 'jsonwebtoken';
 import User from '@models/User.js';
-import { processEnv } from '@utils/processEnv.js';
 import { signToken } from '@utils/auth.js';
 import { LoginSessionInterface } from '@ts/interfaces.js';
 
@@ -27,12 +25,17 @@ router.post('/login', async (req: Request, res: Response) => {
 
     const token = signToken(user);
 
+    if (req.session.userId) {
+      res.status(200).json({ message: 'User is already logged in' });
+      return;
+    }
+
     // Save session for login
     req.session.save(() => {
       const sessionData = req.session as LoginSessionInterface;
       sessionData.loggedIn = true;
       sessionData.username = user.username;
-      sessionData.user_id = user.id;
+      sessionData.userId = user.id;
       res.status(200).json({
         message: 'You are successfully logged in',
         token: token
@@ -43,10 +46,20 @@ router.post('/login', async (req: Request, res: Response) => {
   }
 });
 
-// TODO: POST Logout a user 
-router.post('/logout', async (req: Request, res: Response) => {
+// GET Logout a user
+router.get('/logout', async (req: Request, res: Response) => {
   try {
-  } catch (error: any) {}
+    // Clear the session data
+    req.session.destroy((error) => {
+      if (error) {
+        res.status(500).json({ message: 'Internal server error. ' + error });
+        return;
+      }
+      res.status(200).json({ message: 'Logout successful' });
+    });
+  } catch (error) {
+    res.status(500).json({ message: 'Internal server error. ' + error });
+  }
 });
 
 // GET all users
@@ -60,9 +73,9 @@ router.get('/users', async (req: Request, res: Response) => {
 });
 
 // GET a single user by ID
-router.get('/user/:d', async (req: Request, res: Response) => {
+router.get('/user/:id', async (req: Request, res: Response) => {
   try {
-    const user = User.findByPk(req.params.id);
+    const user = await User.findByPk(req.params.id);
     if (!user) {
       return res.status(404).json({ message: 'User not found' });
     }
@@ -75,21 +88,7 @@ router.get('/user/:d', async (req: Request, res: Response) => {
 // POST create a new user
 router.post('/user', async (req: Request, res: Response) => {
   try {
-    const {
-      firstName,
-      lastName,
-      username,
-      password,
-      email,
-      phone
-    }: {
-      firstName: string;
-      lastName: string;
-      username: string;
-      password: string;
-      email: string;
-      phone: string;
-    } = req.body;
+    const username = req.body.username
 
     // Check if user exists
     const existingUser = await User.findOne({
@@ -100,15 +99,7 @@ router.post('/user', async (req: Request, res: Response) => {
       return res.status(400).json({ message: 'Username already exists.' });
     }
 
-    const hashedPassword = await bcrypt.hash(password, 10);
-    const user = await User.create({
-      firstName,
-      lastName,
-      username,
-      password: hashedPassword,
-      email,
-      phone
-    });
+    const user = await User.create(req.body);
     res.status(201).json(user);
   } catch (error: any) {
     res.status(500).json({ message: error.message });
@@ -130,7 +121,7 @@ router.put('/user/:id', async (req: Request, res: Response) => {
 });
 
 // POST soft delete a user
-router.post('/user/delete/:id', async (req: Request, res: Response) => {
+router.delete('/user/delete/:id', async (req: Request, res: Response) => {
   try {
     const user = User.findByPk(req.params.id);
     if (!user) {
@@ -144,7 +135,7 @@ router.post('/user/delete/:id', async (req: Request, res: Response) => {
 });
 
 // POST restore a (soft) deleted user
-router.post('/user/restore/:id', async (res: Response, req: Request) => {
+router.post('/user/restore/:id', async (req: Request, res: Response) => {
   try {
     const user = User.findByPk(req.params.id);
     if (!user) {

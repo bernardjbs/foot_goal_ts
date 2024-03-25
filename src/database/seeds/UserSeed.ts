@@ -8,15 +8,15 @@ const userData: UserInterface[] = [
     username: 'admin',
     password: await bcrypt.hash('secret', 10),
     email: 'admin@footgoal.com',
-    phone: '038974867',
-  }, 
+    phone: '038974867'
+  },
   {
     firstName: 'Jean',
     lastName: 'Sin',
     username: 'jeansin',
     password: await bcrypt.hash('secret', 10),
     email: 'jean@footgoal.com',
-    phone: '049238492',
+    phone: '049238492'
   },
   {
     firstName: 'User',
@@ -24,8 +24,8 @@ const userData: UserInterface[] = [
     username: 'user',
     password: await bcrypt.hash('secret', 10),
     email: 'user@footgoal.com',
-    phone: '099384742',
-  },
+    phone: '099384742'
+  }
 ];
 
 export const seedUsers = () => User.bulkCreate(userData);

@@ -1,6 +1,16 @@
 import { DataTypes, Model, InferAttributes, InferCreationAttributes, CreationOptional } from '@sequelize/core';
 import bcrypt from 'bcrypt';
-import { Attribute, PrimaryKey, AutoIncrement, NotNull, Table, BeforeCreate, DeletedAt } from '@sequelize/core/decorators-legacy';
+import {
+  Attribute,
+  PrimaryKey,
+  AutoIncrement,
+  NotNull,
+  Table,
+  BeforeCreate,
+  DeletedAt,
+  BeforeUpdate,
+  Unique
+} from '@sequelize/core/decorators-legacy';
 
 @Table({
   underscored: true,
@@ -22,6 +32,7 @@ class User extends Model<InferAttributes<User>, InferCreationAttributes<User>> {
 
   @Attribute(DataTypes.STRING)
   @NotNull
+  @Unique
   declare username: string;
 
   @Attribute(DataTypes.STRING)
@@ -39,18 +50,29 @@ class User extends Model<InferAttributes<User>, InferCreationAttributes<User>> {
   // Soft delete
   @DeletedAt
   declare deletedAt: Date | null;
-  
+
   // TODO: Association belongsToMany Competitions
 
-  //TODO: BeforeCreate: Check if hashing when saved
   @BeforeCreate()
+  static async beforeCreateHook(instance: User) {
+    await User.hashPassword(instance);
+  }
+  
+
+  @BeforeUpdate()
+  static async beforeUpdateHook(instance: User) {
+    await User.hashPassword(instance);
+  }
+
   static async hashPassword(instance: User) {
     if (instance.changed('password') && instance.password !== null) {
       const saltRounds = 10;
       const hashedPassword = await bcrypt.hash(instance.password, saltRounds);
       instance.password = hashedPassword;
+      console.log(`instance password: ${instance.password}`)
     }
   }
+  
 }
 
 export default User;

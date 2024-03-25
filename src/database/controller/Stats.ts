@@ -77,7 +77,7 @@ router.delete('/stats/:matchId', async (req: Request, res: Response) => {
     });
 
     res.status(200).json({ deletedRowsCount });
-  } catch (error:any) {
+  } catch (error: any) {
     res.status(500).json({ message: error.message });
   }
 });

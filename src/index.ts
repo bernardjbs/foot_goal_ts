@@ -3,7 +3,7 @@ import session from 'express-session';
 import migrate from '@database/migration/index.js';
 import seedAll from '@database/seeds/index.js';
 import argv from '@utils/args.js';
-import routes from '@controllers/index.js'
+import routes from '@controllers/index.js';
 import bodyParser from 'body-parser';
 import { DataTypes } from '@sequelize/core';
 // import SequelizeStore from 'connect-session-sequelize';
@@ -14,6 +14,14 @@ import { processEnv } from '@utils/processEnv.js';
 
 const SequelizeStore = SequelizeStoreConstructor(session.Store); // Create the constructor using the provided session.Store
 
+declare module 'express-session' {
+  interface SessionData {
+    userId?: string;
+    fruit?: string;
+    loggedIn?: boolean;
+  }
+}
+
 const app = express();
 app.use(bodyParser.json());
 
@@ -22,18 +30,16 @@ const PORT = process.env.PORT || 3000;
 const Session = sequelizeConnection.define('Session', {
   sid: {
     type: DataTypes.STRING,
-    primaryKey: true,
+    primaryKey: true
   },
   userId: DataTypes.INTEGER,
   expires: DataTypes.DATE,
-  data: DataTypes.TEXT,
+  data: DataTypes.TEXT
 });
-
-Session.belongsTo(User);
 
 const sessionStore = new SequelizeStore({
   db: sequelizeConnection,
-  table: 'Session',
+  table: 'Session'
 });
 
 const sess = {
@@ -43,17 +49,17 @@ const sess = {
   },
   resave: false,
   saveUninitialized: true,
-  store: sessionStore
+  store: sessionStore,
+  limit: 1
 };
 
-app.use(session(sess))
+app.use(session(sess));
 
 // Migrate
 await migrate(argv('migrate'));
 
 // Seed
 await seedAll(argv('seed'));
-
 
 app.use(routes);
 

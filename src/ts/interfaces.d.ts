@@ -51,5 +51,6 @@ export interface StatsInterface {
 export interface LoginSessionInterface {
   loggedIn?: boolean;
   username?: string;
-  user_id?: number;
+  userId?: number;
+  sessionType?: string;
 }
