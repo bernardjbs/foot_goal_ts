@@ -37,7 +37,7 @@
       "@database/*": ["src/database/*"],
       "@webwalker/*": ["src/webwalker/*"],
       "@models/*": ["src/database/models/*"],
-      "@controllers/*": ["src/database/controllers/*"],
+      "@controllers/*": ["src/database/controller/*"],
       "@ts/*": ["src/ts/*"],
       "@root": ["."], 
     },                                     /* Specify a set of entries that re-map imports to additional lookup locations. */

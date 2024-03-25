@@ -47,3 +47,10 @@ export interface StatsInterface {
   crossesComplete: number | null;
   interceptions: number | null;
 }
+
+export interface LoginSessionInterface {
+  loggedIn?: boolean;
+  username?: string;
+  userId?: number;
+  sessionType?: string;
+}

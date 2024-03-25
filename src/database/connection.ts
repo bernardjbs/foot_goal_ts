@@ -13,7 +13,7 @@ let sequelizeConnection: Sequelize = new Sequelize(DB_DATABASE, DB_USERNAME, DB_
   dialect: DB_DIALECT,
   port: 3306,
   schema: DB_DATABASE,
-  models: [User, FootMatch, Competition, Stats, UserMatch],
+  models: [User, FootMatch, Competition, Stats, UserMatch]
   // logging: (...msg) => console.log(msg)
 });
 

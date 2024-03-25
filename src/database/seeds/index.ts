@@ -14,7 +14,7 @@ const seedAll = async (fresh: string | boolean | null) => {
     await seedStats();
     console.log('\n----- STATS SEEDED -----\n');
   } else {
-    console.log('\n----- NOT SEEDING -----\n')
+    console.log('\n----- NOT SEEDING -----\n');
   }
 };
 

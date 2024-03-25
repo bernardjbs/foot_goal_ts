@@ -1,5 +1,21 @@
-import { DataTypes, Model, InferAttributes, InferCreationAttributes, CreationOptional, NonAttribute } from '@sequelize/core';
-import { Attribute, PrimaryKey, AutoIncrement, NotNull, Table, BelongsToMany, HasMany, Unique } from '@sequelize/core/decorators-legacy';
+import {
+  DataTypes,
+  Model,
+  InferAttributes,
+  InferCreationAttributes,
+  CreationOptional,
+  NonAttribute
+} from '@sequelize/core';
+import {
+  Attribute,
+  PrimaryKey,
+  AutoIncrement,
+  NotNull,
+  Table,
+  BelongsToMany,
+  HasMany,
+  Unique
+} from '@sequelize/core/decorators-legacy';
 import User from './User.js';
 import Stats from './Stats.js';
 
@@ -35,7 +51,7 @@ class FootMatch extends Model<InferAttributes<FootMatch>, InferCreationAttribute
   declare awayTeam: string;
 
   @BelongsToMany(() => User, {
-    through: 'UserMatch',
+    through: 'UserMatch'
   })
   declare userMatch?: NonAttribute<User[]>;
 
