@@ -2,13 +2,13 @@
   "name": "foot_goal_ts",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "watch": "npm run build && concurrently \"tsc -w\" \"tsc-alias -w\"",
-    "start": "node dist/index.js",
-    "start:fresh": "node dist/index.js --migrate:fresh",
-    "start:fresh:seed": "node dist/index.js --migrate:fresh --seed",
+    "start": "node dist/server.js",
+    "start:fresh": "node dist/server.js --migrate:fresh",
+    "start:fresh:seed": "node dist/server.js --migrate:fresh --seed",
     "dev": "concurrently \"npm run watch\" \"npm run start\"",
     "build": "tsc --project tsconfig.json && tsc-alias -p tsconfig.json"
   },
